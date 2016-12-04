@@ -69,7 +69,7 @@ public class Grafica extends JFrame {
 		    bm.setIcon(new ImageIcon( newimg2 ));
 		    be.setIcon(new ImageIcon( newimg3 ));
 		  } catch (Exception ex) {
-			  //ex.printStackTrace();
+			  ex.printStackTrace();
 			  bn = new JButton("Nuovo");
 			  bm = new JButton("Modifica");
 			  be = new JButton("Elimina");

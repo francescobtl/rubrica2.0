@@ -30,7 +30,7 @@ import rubrica.logica.Rubrica;
 public class Editor_Persona extends JFrame{
 
 	private JPanel panel;
-	private JTextField field1, field2, field3, field4, field5;
+	private JTextField field1, field2, field3, field4, field5;// field6;
 	private JButton b1, b2;
 	static int posizione;
 	static JLabel l;
@@ -41,12 +41,15 @@ public class Editor_Persona extends JFrame{
 		this.r = r;
 		this.table=table;
 		this.setTitle("Editor Persona");
+		//field6 = new JTextField();
 		field1 = new JTextField();
 		field2 = new JTextField();
 		field3 = new JTextField();
 		field4 = new JTextField();
 		field5 = new JTextField();
 		this.panel= new JPanel(new GridLayout(6, 2));
+		//panel.add(new JLabel("CodFiscale:"));
+		//panel.add(field6);
 		panel.add(new JLabel("Nome:"));
 		panel.add(field1);
 		panel.add(new JLabel("Cognome:"));
@@ -169,6 +172,7 @@ public class Editor_Persona extends JFrame{
 				String indirizzo = (field3.getText());
 				String telefono = (field4.getText());
 				String eta = (field5.getText());
+				//String cf = (field6.getText());
 				ConvalidaDati cd = new ConvalidaDati();
 				boolean err = cd.convalida(nome, cognome, indirizzo, telefono, eta);
 				if (!err){
