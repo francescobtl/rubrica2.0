@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
@@ -17,7 +16,6 @@ import javax.swing.table.DefaultTableModel;
 import rubrica.logica.Persona;
 import rubrica.logica.Rubrica;
 
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JToolBar;
@@ -52,7 +50,6 @@ public class Grafica extends JFrame {
 		JScrollPane scrollPane = new JScrollPane(table);
 		frame.add(scrollPane, BorderLayout.CENTER);
 		frame.setSize(800, 400);
-		File imageCheck = new File("add.jpg");
 		bn = new JButton();
 		bm = new JButton();
 		be = new JButton();
