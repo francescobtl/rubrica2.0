@@ -71,6 +71,8 @@ public class Grafica extends JFrame {
 		  } catch (Exception ex) {
 			  //ex.printStackTrace();
 			  bn = new JButton("Nuovo");
+			  bm = new JButton("Modifica");
+			  be = new JButton("Elimina");
 		  }
 	
 		bn.setActionCommand("aggiungi");

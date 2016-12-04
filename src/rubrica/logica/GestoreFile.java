@@ -11,7 +11,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class LettoreFile {
+public class GestoreFile {
 
 	static final String nomeFile = "Persona"; 
 
@@ -104,8 +104,8 @@ public class LettoreFile {
 		
 		for (int i =p;i<voci.size();i++){
 			try {
-				Path source = Paths.get("informazioni/Persona"+(p+1)+".txt");
-				Files.move(source, source.resolveSibling("Persona"+p+".txt"));
+				Path source = Paths.get("informazioni/Persona"+(i+1)+".txt");
+				Files.move(source, source.resolveSibling("Persona"+i+".txt"));
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

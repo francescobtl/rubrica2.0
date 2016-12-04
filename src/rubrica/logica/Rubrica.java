@@ -8,7 +8,7 @@ public class Rubrica {
 	
 	private ArrayList<Persona> voci = new ArrayList<>();
 	
-	static LettoreFile f = new LettoreFile();
+	static GestoreFile f = new GestoreFile();
 	
 	public Rubrica (){
 		
@@ -36,8 +36,6 @@ public class Rubrica {
 	
 	public void eliminaVoci (int p){
 		if (this.voci.size()>0){
-			System.out.println(p);
-
 			this.voci.remove(p);
 			f.removeFile(p);
 			f.rewriteFile(voci, p);
