@@ -18,11 +18,10 @@ public class LettoreFile {
 
 	public ArrayList<Persona> leggiFile (){
 		File file = new File("informazioni");
+		if (!(file.isDirectory())) file.mkdir();
 		ArrayList<Persona> voci =new ArrayList<>();
 		for (final File fileEntry : file.listFiles()) {
 
-			//    System.out.println(fileEntry.getName());
-			// }
 			Scanner scanner = null;
 			try {
 				scanner = new Scanner(fileEntry);
