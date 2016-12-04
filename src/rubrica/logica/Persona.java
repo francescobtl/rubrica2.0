@@ -12,7 +12,6 @@ public class Persona {
 	}
 
 	public Persona(String nome, String cognome, String indirizzo, String telefono, int eta) {
-		super();
 		this.nome = nome;
 		this.cognome = cognome;
 		this.indirizzo = indirizzo;
