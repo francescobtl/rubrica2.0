@@ -2,8 +2,15 @@ package rubrica.grafica;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.net.URL;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -15,6 +22,7 @@ import rubrica.logica.Rubrica;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JToolBar;
 
 
 
@@ -26,6 +34,7 @@ public class Grafica extends JFrame {
 	private JButton bn, bm, be;
 	private Rubrica r;
 	private JTable table;
+	private JToolBar tools;
 
 	public Grafica(){
 		this.setTitle("Gestore Rubrica");
@@ -45,21 +54,39 @@ public class Grafica extends JFrame {
 		JScrollPane scrollPane = new JScrollPane(table);
 		frame.add(scrollPane, BorderLayout.CENTER);
 		frame.setSize(800, 400);
-		bn = new JButton("Nuovo");
-		bm = new JButton("Modifica");
-		be = new JButton("Elimina");
+		File imageCheck = new File("add.jpg");
+		bn = new JButton();
+		bm = new JButton();
+		be = new JButton();
+		tools = new JToolBar();
+		tools.add(bn);
+		tools.add(bm);
+		tools.add(be);
+		
+		try {
+			ImageIcon image1 = new ImageIcon(ImageIO.read(new URL("https://www.bignerdranch.com/img/blog/2014/07/Button-2.png")));
+			ImageIcon image2 = new ImageIcon(ImageIO.read(new URL("https://image.freepik.com/free-icon/edit-button_318-99287.jpg")));	
+			ImageIcon image3 = new ImageIcon(ImageIO.read(new URL("https://image.freepik.com/free-icon/delete-button_318-27987.jpg")));
+			Image newimg1 = image1.getImage().getScaledInstance( 25, 25,  java.awt.Image.SCALE_SMOOTH ) ;
+			Image newimg2 = image2.getImage().getScaledInstance( 25, 25,  java.awt.Image.SCALE_SMOOTH ) ;
+			Image newimg3 = image3.getImage().getScaledInstance( 25, 25,  java.awt.Image.SCALE_SMOOTH ) ;
+		    bn.setIcon(new ImageIcon( newimg1 ));
+		    bm.setIcon(new ImageIcon( newimg2 ));
+		    be.setIcon(new ImageIcon( newimg3 ));
+		  } catch (Exception ex) {
+			  //ex.printStackTrace();
+			  bn = new JButton("Nuovo");
+		  }
+	
 		bn.setActionCommand("aggiungi");
 		bm.setActionCommand("modifica");
 		be.setActionCommand("elimina");
-		JPanel pulsanti = new JPanel();
-		pulsanti.setLayout(new GridLayout(1, 3));
-		pulsanti.add(bn);
-		pulsanti.add(bm);
-		pulsanti.add(be);
+		
 		bn.addActionListener(new Listener());
 		bm.addActionListener(new Listener());
 		be.addActionListener(new Listener());
-		frame.add(pulsanti, BorderLayout.SOUTH);
+		
+		frame.add("North", tools);
 		frame.setVisible(true);
 	}
 
