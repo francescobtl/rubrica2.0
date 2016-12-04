@@ -58,12 +58,7 @@ public class LettoreFile {
 		try {
 
 			scrivi = new PrintStream(new FileOutputStream("informazioni/"+nomeFile+size+".txt", true));
-			//if (size == 0) {
 			scrivi.append(p.getNome() + ";" + p.getCognome() + ";" + p.getIndirizzo() + ";" + p.getTelefono() + ";" + p.getEta());
-			//}else{
-			//	scrivi.append(System.lineSeparator());
-			//	scrivi.append(p.getNome() + ";" + p.getCognome() + ";" + p.getIndirizzo() + ";" + p.getTelefono() + ";" + p.getEta());
-			//}
 			scrivi.close();
 
 
@@ -92,12 +87,8 @@ public class LettoreFile {
 		try {
 			Files.delete(path);
 			scrivi = new PrintStream(new FileOutputStream("informazioni/Persona"+progr+".txt", true));
-			//if (size == 0) {
 			scrivi.append(p.getNome() + ";" + p.getCognome() + ";" + p.getIndirizzo() + ";" + p.getTelefono() + ";" + p.getEta());
-			//}else{
-			//	scrivi.append(System.lineSeparator());
-			//	scrivi.append(p.getNome() + ";" + p.getCognome() + ";" + p.getIndirizzo() + ";" + p.getTelefono() + ";" + p.getEta());
-			//}
+			
 			scrivi.close();
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
@@ -112,7 +103,6 @@ public class LettoreFile {
 
 	public void rewriteFile (ArrayList<Persona> voci, int p){
 		
-		//Path source = Paths.get("informazioni");
 		for (int i =p;i<voci.size();i++){
 			try {
 				Path source = Paths.get("informazioni/Persona"+(p+1)+".txt");
