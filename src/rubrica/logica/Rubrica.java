@@ -26,7 +26,8 @@ public class Rubrica {
 	
 	public void modificaVoce(int posizione, Persona nEw){
 		this.voci.set(posizione, nEw);
-		f.rewriteFile(voci);
+		f.editFile(posizione, nEw);
+		//f.rewriteFile(voci);
 		
 		
 	}
@@ -35,8 +36,11 @@ public class Rubrica {
 	
 	public void eliminaVoci (int p){
 		if (this.voci.size()>0){
-		this.voci.remove(p);
-		f.rewriteFile(voci);
+			System.out.println(p);
+
+			this.voci.remove(p);
+			f.removeFile(p);
+			f.rewriteFile(voci, p);
 		}
 		
 	}

@@ -135,18 +135,25 @@ public class Editor_Persona extends JFrame{
 			}
 
 			if( command.equals( "salva2" ))  {
-				Persona p = new Persona();
-				p.setNome(field1.getText());
-				p.setCognome(field2.getText());
-				p.setEta(Integer.parseInt(field5.getText()));
-				p.setIndirizzo(field3.getText());
-				p.setTelefono(field4.getText());
-				r.modificaVoce(posizione, p);
-				DefaultTableModel model = (DefaultTableModel) table.getModel();
-				model.setValueAt(r.getVoci().get(posizione).getNome(), posizione, 0);
-				model.setValueAt(r.getVoci().get(posizione).getCognome(), posizione, 1);
-				model.setValueAt(r.getVoci().get(posizione).getTelefono(), posizione, 2);
-				dispose();
+				
+				ConvalidaDati cd = new ConvalidaDati();
+				boolean err = cd.convalida(field1.getText(), field2.getText(), field3.getText(), field4.getText(), field5.getText());
+				if (!err){
+					Persona p = new Persona();
+					p.setNome(field1.getText());
+					p.setCognome(field2.getText());
+					p.setEta(Integer.parseInt(field5.getText()));
+					p.setIndirizzo(field3.getText());
+					p.setTelefono(field4.getText());
+					r.modificaVoce(posizione, p);
+					DefaultTableModel model = (DefaultTableModel) table.getModel();
+					model.setValueAt(r.getVoci().get(posizione).getNome(), posizione, 0);
+					model.setValueAt(r.getVoci().get(posizione).getCognome(), posizione, 1);
+					model.setValueAt(r.getVoci().get(posizione).getTelefono(), posizione, 2);
+					dispose();
+				}
+				else JOptionPane.showMessageDialog(panel, "Dati non validi", "Errore", JOptionPane.ERROR_MESSAGE);
+ 
 			}
 
 

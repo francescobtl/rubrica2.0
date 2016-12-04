@@ -5,28 +5,38 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class LettoreFile {
 
+	static final String nomeFile = "Persona"; 
+
 
 	public ArrayList<Persona> leggiFile (){
-		File file = new File("informazioni.txt");
+		File file = new File("informazioni");
 		ArrayList<Persona> voci =new ArrayList<>();
-		Scanner scanner = null;
-		try {
-			scanner = new Scanner(file);
-			while (scanner.hasNextLine()) {
-				String line = scanner.nextLine();
-				if (line.matches("^*.*;.*;.*;.*;.*$")) voci.add(leggiRiga(line));
+		for (final File fileEntry : file.listFiles()) {
 
+			//    System.out.println(fileEntry.getName());
+			// }
+			Scanner scanner = null;
+			try {
+				scanner = new Scanner(fileEntry);
+				while (scanner.hasNextLine()) {
+					String line = scanner.nextLine();
+					if (line.matches("^*.*;.*;.*;.*;.*$")) voci.add(leggiRiga(line));
+
+				}
+			} catch (FileNotFoundException e) {
+				//e.printStackTrace();
 			}
-		} catch (FileNotFoundException e) {
-			//e.printStackTrace();
-		}
-		finally {
-			if (scanner != null)scanner.close();
+			finally {
+				if (scanner != null)scanner.close();
+			}
 		}
 
 		return voci;
@@ -47,13 +57,13 @@ public class LettoreFile {
 		PrintStream scrivi = null;
 		try {
 
-			scrivi = new PrintStream(new FileOutputStream("informazioni.txt", true));
-			if (size == 0) {
-				scrivi.append(p.getNome() + ";" + p.getCognome() + ";" + p.getIndirizzo() + ";" + p.getTelefono() + ";" + p.getEta());
-			}else{
-				scrivi.append(System.lineSeparator());
-				scrivi.append(p.getNome() + ";" + p.getCognome() + ";" + p.getIndirizzo() + ";" + p.getTelefono() + ";" + p.getEta());
-			}
+			scrivi = new PrintStream(new FileOutputStream("informazioni/"+nomeFile+size+".txt", true));
+			//if (size == 0) {
+			scrivi.append(p.getNome() + ";" + p.getCognome() + ";" + p.getIndirizzo() + ";" + p.getTelefono() + ";" + p.getEta());
+			//}else{
+			//	scrivi.append(System.lineSeparator());
+			//	scrivi.append(p.getNome() + ";" + p.getCognome() + ";" + p.getIndirizzo() + ";" + p.getTelefono() + ";" + p.getEta());
+			//}
 			scrivi.close();
 
 
@@ -66,26 +76,53 @@ public class LettoreFile {
 
 	}
 	
-	public void rewriteFile (ArrayList<Persona> voci){
-		PrintStream scrivi = null;
-		try
-		{
-			FileOutputStream f = new FileOutputStream("informazioni.txt");
-			scrivi = new PrintStream(f);
-			for (Persona p : voci){
-				scrivi.println(p.getNome() + ";" + p.getCognome() + ";" + p.getIndirizzo() + ";" + p.getTelefono() + ";" + p.getEta());
-
-			}
-			
+	public void removeFile(int progr){
+		Path p = Paths.get("informazioni/Persona"+progr+".txt");
+		try {
+			Files.delete(p);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
 		}
-		catch (IOException e)
-		{
-			System.out.println("Errore: " + e);
-			
+	}
+	
+	public void editFile (int progr, Persona p){
+		PrintStream scrivi = null;
+		Path path = Paths.get("informazioni/Persona"+progr+".txt");
+		try {
+			Files.delete(path);
+			scrivi = new PrintStream(new FileOutputStream("informazioni/Persona"+progr+".txt", true));
+			//if (size == 0) {
+			scrivi.append(p.getNome() + ";" + p.getCognome() + ";" + p.getIndirizzo() + ";" + p.getTelefono() + ";" + p.getEta());
+			//}else{
+			//	scrivi.append(System.lineSeparator());
+			//	scrivi.append(p.getNome() + ";" + p.getCognome() + ";" + p.getIndirizzo() + ";" + p.getTelefono() + ";" + p.getEta());
+			//}
+			scrivi.close();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 		finally {
 			if (scrivi != null) scrivi.close();
 		}
+		
+		
+	}
+
+	public void rewriteFile (ArrayList<Persona> voci, int p){
+		
+		//Path source = Paths.get("informazioni");
+		for (int i =p;i<voci.size();i++){
+			try {
+				Path source = Paths.get("informazioni/Persona"+(p+1)+".txt");
+				Files.move(source, source.resolveSibling("Persona"+p+".txt"));
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		
 
 	}
 
